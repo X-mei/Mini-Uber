@@ -1,0 +1,92 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+    Rides as Driver
+{% endblock %}
+
+{% block driver_pages %}
+    active
+{% endblock %}
+
+{% block body_block %}
+
+
+    {% if rides %}
+        <h1>
+            You are the driver in the following ride:
+        </h1>
+        <!--Display a table to show all the requests owned by the user.-->
+        <table class="table mb-0">
+            <thead>
+            <tr>
+                <th>
+                    Destination
+                </th>
+
+                <th>
+                    Arrival time
+                </th>
+
+                <th>
+                    Passengers
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    View
+                </th>
+
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for ride in rides %}
+                <tr>
+                    <td>
+                        {{ ride.destination_addr }}
+                    </td>
+                    <td>
+                        {{ ride.arrival_time }}
+                    </td>
+
+                    <td>
+                        {{ ride.passengers }}
+                    </td>
+
+                    <td>
+                        {% if ride.ride_status == 'CF' %}
+                            Confirmed
+                        {% else %}
+                            Completed
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <!--The driver can view all the detail of this ride-->
+                        <a href="{% url 'ride:view_rides' ride.id %}" class="btn btn-primary btn-sm">View</a>
+
+                    </td>
+
+                    <td>
+                        {% if ride.ride_status == 'CF' %}
+                            <a href="{% url 'ride:finish_ride' ride.id %}" class="btn btn-primary btn-sm">Complete</a>
+                        {% else %}
+
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1>
+            You currently does not have any ride as a driver!
+        </h1>
+    {% endif %}
+{% endblock %}

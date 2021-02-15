@@ -1,0 +1,11 @@
+{% extends 'ride/base_bootstarp.html' %}
+
+{% block title_block %}
+  Register as driver!
+{% endblock %}
+
+
+
+{% block body_block %}
+
+{% endblock %}

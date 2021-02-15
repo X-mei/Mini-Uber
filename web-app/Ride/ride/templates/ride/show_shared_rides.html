@@ -1,0 +1,110 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+    Shared rides
+{% endblock %}
+
+{% block shared_block %}
+    Active
+{% endblock %}
+
+{% block body_block %}
+    {% if rides %}
+        <h1>
+            The following rides are shared by you:
+        </h1>
+        <!--Display a table to show all the requests owned by the user.-->
+        <table class="table mb-0">
+        <thead>
+        <tr>
+            <th>
+                Destination
+            </th>
+
+            <th>
+                Arrival time
+            </th>
+
+            <th>
+                Passengers
+            </th>
+
+            <th>
+                Shared?
+            </th>
+
+            <th>
+                Vehicle type
+            </th>
+
+            <th>
+                Special request
+            </th>
+
+            <th>
+                Status
+            </th>
+
+            <th>
+                Action
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for ride in rides %}
+            <tr>
+                <td>
+                    {{ ride.destination_addr }}
+                </td>
+                <td>
+                    {{ ride.arrival_time }}
+                </td>
+
+                <td>
+                    {{ ride.passengers }}
+                </td>
+
+                <td>
+                    {% if ride.can_be_shared %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+
+                <td>
+                    {{ ride.vehicle_type }}
+                </td>
+
+                <td>
+                    {{ ride.special_request }}
+                </td>
+
+                <td>
+                    {% if ride.ride_status == 'OP' %}
+                        <strong>
+                            Open
+                        </strong>
+                    {% else %}
+                        {% if ride.ride_status == 'CF' %}
+                            Confirmed
+                        {% else %}
+                            Completed
+                        {% endif %}
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="{% url 'ride:view_rides' ride.id %}" class="btn btn-primary btn-sm">View</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <h1>
+            You currently does not have any on-going requests (shared)!
+        </h1>
+    {% endif %}
+{% endblock %}

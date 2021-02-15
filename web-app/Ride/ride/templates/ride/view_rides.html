@@ -1,0 +1,31 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+    View rides
+{% endblock %}
+
+{% block body_block %}
+    <h1>
+        <!--Display the ride information.-->
+        Ride information:
+    </h1>
+    <form id="form" method="post" {% if can_edit %}action="{% url 'ride:view_rides' ride.id %}"{% endif %} enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if can_edit %}
+            <input type="submit" name="submit" value="Save"/>
+        {% endif %}
+    </form>
+    </br>
+    </br>
+    {% if have_driver %}
+        <!--Display the driver information.-->
+        <form id="driver_info" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ driver_info.as_p }}
+        </form>
+    {% else %}
+        <h1>There are currently no driver information available yet.</h1>
+    {% endif %}
+
+{% endblock %}

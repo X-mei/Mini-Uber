@@ -1,0 +1,19 @@
+<h1>Register</h1>
+
+{% if success %}
+<h2>Thank you for registering!</h2>
+<a href="{url 'index'}"> Return to homepage</a>
+
+<br />
+{% else %}
+<strong>Register here!</strong><br />
+
+<form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+
+ {% csrf_token %}
+
+ <!-- 显示每个表单 -->
+ {{ u_form.as_p }}
+ <!-- 提供一个按钮，点击后提交表单 -->
+ <input type="submit" name="submit" value="Register" />
+</form>

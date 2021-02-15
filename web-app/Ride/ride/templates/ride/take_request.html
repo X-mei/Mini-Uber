@@ -1,0 +1,24 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+    Take request
+{% endblock %}
+
+{% block body_block %}
+    {% if failed %}
+        <h1>
+            <!--Display the ride information.-->
+            Your request to take the ride is not success!
+        </h1>
+
+        {% if reason %}
+            <h1>
+                Reason: {{ reason }}
+            </h1>
+        {% else %}
+            <h1>
+                Reason: You do not have the authority to do this.
+            </h1>
+        {% endif %}
+    {% endif %}
+{% endblock %}

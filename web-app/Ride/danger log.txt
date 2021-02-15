@@ -1,0 +1,50 @@
+1.What happen if a user enter invalid field when registering, such as enter "test" into the email field?
+A: It will not pass the underlying check performed by the model.
+
+2. Most webpages required the user to login to access, what if a user does not login and try to access these pages through url?
+A: This will raise the 404 error.
+
+3. What if a user enter the url for logout even if he does not login?
+A: Nothing happens
+
+
+4. What if the user does not have a email address, then he will not receive notifications from the website.
+The email field is optional in the provided user model.
+A: Customize the user model to change this field to required.
+
+
+5. What if a user enter a invalid passengers when registering as the driver? For instance, the user may enter -5?
+A: Provide validation, the valid passenger number is from 1 to 50.
+
+6. We need to make sure that the first name and last name field is required in the underlying model instead of ensuring using form.
+Some users may be able to bypass the form detection.
+A: Customize the user model to change these fields to required.
+
+7. What if a user who has already registered as driver still access the page to register as driver?
+A: Provide a information such as "You have already registered as the driver" on the page.
+
+8. Should we check the format of the user's first name, last name and driver license?
+A: We do not check it here, it should be straightforward to do so.
+
+9. What if a user access a page which should only be accessed if the user is a driver?
+A: He should see a 404 page. The user must login and registered as the driver to see these pages.
+
+10.The user should input a valid arrival_time(it must not in the past, we should do the valid check.)
+
+11.The time for request should be in the future, instead of past.
+
+12.What if a user accept a request (his car fulfills the requirement), then he changes the number of seats or other settings in his profile so that it does not fulfill the ride requirement, what will happen?
+A: We currently do not check this, but we should.
+
+13.What happens if a user wants to join a ride as sharer through url?
+A: We should do valid check to see whether the user can join the ride.
+
+14.What happens if a driver wants to take a request through the url?
+A: We should do valid check to see whether the user can take the request.
+
+15.What happens if a sharer search rides using time before now?
+A: Invalid, provide a message.
+
+16.Can the owner of the ride change the ride information after other users join the ride as sharer?
+This can cause problems: If a user join the ride with party size 6, then the owner should not be able to set the ride passengers under 6.
+A: We currently do not check this, but we should.

@@ -1,0 +1,29 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+  Register as driver!
+{% endblock %}
+
+
+
+{% block body_block %}
+{% if registered %}
+<h1>
+  You have already registered as the driver.
+</h1>
+{% else %}
+{% if success %}
+<h1>
+  Thank you for registered as the driver!
+</h1>
+{% else %}
+<!--Display the form for user to filling in.-->
+<form id="driver_form" method="post" action="{% url 'ride:driver_register' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ driver_form.as_p }}
+  <input type="submit" name="submit" value="Register!" />
+</form>
+
+{% endif %}
+{% endif %}
+{% endblock %}

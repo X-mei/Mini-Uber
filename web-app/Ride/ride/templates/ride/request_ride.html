@@ -1,0 +1,21 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+  Create Ride
+{% endblock %}
+
+{% block request_block %}
+    active
+{% endblock %}
+{% block body_block %}
+<h1>
+Please fill in the following form to create request
+</h1>
+<!--Display the form for user to filling in.-->
+<form id="request_form" method="post" action="{% url 'ride:request_ride' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ request_form.as_p }}
+  <input type="submit" name="submit" value="Create" />
+</form>
+
+{% endblock %}

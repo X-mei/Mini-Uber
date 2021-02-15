@@ -1,0 +1,31 @@
+
+class Ride(models.Model):
+    # It should be noted, all these three types of users can view the status of the drive.
+    # We should have some kinds of mechanism to prevent some users to see the page.
+    # owner: The owner of the request.
+    # driver: The driver of the current request.
+    # sharer: The sharer of the current request.
+
+    
+    # destination address: The destination address
+    # required_arrival(date&time)
+    # Number of passengers.
+    # Optional: vehicle type and other special request.
+    # Can be shared or not (can only be changed by the owner.)
+    # Confirmed(Once a driver accept the request, it is confirmed.)
+    # Complete(The order is complete once the owner marks it to be completed.)
+
+    def can_view_ride(ride_id, user):
+        """
+        Return true if the user can see a specific ride.
+        """
+    def can_change_ride(ride_id, user):
+        """
+        Return true if the user can change the status of the ride.
+        """
+
+class UserProfile(models.Model):
+    # user: The one-to-one related field to a underlying user.
+    # is_driver: true or false
+    # vechile infomation.
+    

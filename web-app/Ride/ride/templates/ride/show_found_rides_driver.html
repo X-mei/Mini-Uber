@@ -1,0 +1,96 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+    Found rides
+{% endblock %}
+
+{% block take_block %}
+    Active
+{% endblock %}
+
+{% block body_block %}
+
+    <h1>
+        Please specify your search conditions:
+    </h1>
+
+    <!--Display the form.-->
+
+    <form id="find_form" method="post" action="{% url 'ride:search_rides_driver' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ find_form.as_p }}
+        <input type="submit" name="submit" value="Search"/>
+    </form>
+    <br>
+
+    {% if displayed %}
+        {% if rides %}
+            <h1>
+                Here are some rides that suit your need:
+            </h1>
+            <!--Display a table to show all the requests owned by the user.-->
+            <table class="table mb-0">
+                <thead>
+                <tr>
+                    <th>
+                        Destination
+                    </th>
+
+                    <th>
+                        Arrival time
+                    </th>
+
+                    <th>
+                        Passengers
+                    </th>
+
+                    <th>
+                        Vehicle type
+                    </th>
+
+                    <th>
+                        Special request
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for ride in rides %}
+                    <tr>
+                        <td>
+                            {{ ride.destination_addr }}
+                        </td>
+                        <td>
+                            {{ ride.arrival_time }}
+                        </td>
+
+                        <td>
+                            {{ ride.passengers }}
+                        </td>
+
+                        <td>
+                            {{ ride.vehicle_type }}
+                        </td>
+
+                        <td>
+                            {{ ride.special_request }}
+                        </td>
+
+                        <td>
+                            <a href="{% url 'ride:take_ride' ride.id %}" class="btn btn-primary btn-sm">Take request</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h1>
+                No suitable ride found!
+            </h1>
+        {% endif %}
+    {% endif %}
+{% endblock %}

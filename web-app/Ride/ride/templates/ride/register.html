@@ -1,0 +1,26 @@
+{% extends 'ride/base_bootstrap.html' %}
+
+{% block title_block %}
+   Register
+{% endblock %}
+
+{% block body_block %}
+
+{% if success %}
+  <h1>Thank you for registering!</h1>
+  <a href="{% url 'index' %}"> Return to homepage</a>
+  <br />
+{% else %}
+  <h1>Register Here!</h1>
+
+  <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+
+   {% csrf_token %}
+   {{ u_form.as_p }}
+   <input type="submit" name="submit" value="Register" />
+  </form>
+
+{% endif %}
+
+
+{% endblock %}
